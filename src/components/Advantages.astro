@@ -1,0 +1,58 @@
+---
+// 核心优势：三张贴纸卡片
+---
+<section class="section" id="advantages">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">ADVANTAGES · 核心优势</span>
+      <h2>我们凭什么赢</h2>
+    </div>
+    <div class="grid grid-3">
+      <article class="sticker-card">
+        <span class="card-badge b-sky">01</span>
+        <h3>低成本 + AI 群体分析</h3>
+        <p>凭借多端低成本架构，用 AI 对校园群体行为做分析，精准匹配搭子与需求。</p>
+        <ul class="card-points">
+          <li>多端复用同一套服务端，边际成本低</li>
+          <li>AI 分析行为数据，匹配搭子与供需</li>
+        </ul>
+      </article>
+      <article class="sticker-card">
+        <span class="card-badge b-sun">02</span>
+        <h3>可扩展至门店</h3>
+        <p>线上信任可延伸至线下校园门店，扩大品牌影响力与履约保障。</p>
+        <ul class="card-points">
+          <li>自提点 + 当面交易，履约看得见</li>
+          <li>校园快闪 × 社团合作，低成本获客</li>
+        </ul>
+      </article>
+      <article class="sticker-card">
+        <span class="card-badge b-mint">03</span>
+        <h3>蚕食对手空间</h3>
+        <p>填补「校园熟人小额交易」空白，正面挤压狐友圈子与闲鱼的生存空间。</p>
+        <ul class="card-points">
+          <li>狐友圈子：有社交、无交易防护</li>
+          <li>闲鱼：有交易、无校园信任半径</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid { display: grid; gap: 26px; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .sticker-card { position: relative; background: #fff; border: 2.5px solid var(--ink); border-radius: var(--radius); padding: 28px 26px 24px; box-shadow: var(--shadow-hard-lg); transition: transform .2s, box-shadow .2s; }
+  .sticker-card:hover { transform: translate(-3px, -4px); box-shadow: 11px 11px 0 var(--ink); }
+  .card-badge { position: absolute; top: -18px; right: 22px; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-latin); font-weight: 800; font-size: 18px; border: 2.5px solid var(--ink); color: #fff; box-shadow: 3px 3px 0 var(--ink); }
+  .card-badge.b-sky { background: var(--sky); }
+  .card-badge.b-sun { background: var(--sun); color: var(--ink); }
+  .card-badge.b-mint { background: var(--mint); }
+  .sticker-card h3 { font-family: var(--font-zh); font-size: 21px; font-weight: 400; margin: 8px 0 8px; letter-spacing: 1px; }
+  .sticker-card p { color: var(--ink-soft); font-weight: 500; font-size: 15px; }
+  .card-points { list-style: none; margin-top: 12px; display: grid; gap: 6px; border-top: 2px dashed rgba(28, 23, 51, .15); padding-top: 12px; }
+  .card-points li { position: relative; padding-left: 18px; font-size: 13.5px; font-weight: 600; color: var(--ink-soft); line-height: 1.5; }
+  .card-points li::before { content: "▹"; position: absolute; left: 0; color: var(--tangerine); font-weight: 900; }
+  @media (max-width: 920px) { .grid-3 { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .grid-3 { grid-template-columns: 1fr; } }
+</style>

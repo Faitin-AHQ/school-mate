@@ -1,0 +1,87 @@
+---
+// 发展路线：横向时间轴（移动端转纵向），当前节点高亮
+---
+<section class="section" id="roadmap">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">ROADMAP · 发展路线</span>
+      <h2>从一校试点，到百校网络</h2>
+    </div>
+
+    <ol class="road">
+      <li class="road-item done" data-delay="0">
+        <span class="road-dot"></span>
+        <span class="road-phase">2026 Q1</span>
+        <h3>立项孵化</h3>
+        <p>辽宁工程技术大学创新创业计划立项，完成需求调研与竞品分析。</p>
+        <ul><li>500+ 份校园问卷</li><li>核心团队组建</li></ul>
+      </li>
+      <li class="road-item active" data-delay="90">
+        <span class="road-dot"></span>
+        <span class="road-phase">2026 Q2</span>
+        <h3>内测上线</h3>
+        <p>小程序 + Web 双端内测，跑通担保交易与拼单核心链路。</p>
+        <ul><li>首批 500 名内测用户</li><li>线下自提点试运营</li></ul>
+      </li>
+      <li class="road-item" data-delay="180">
+        <span class="road-dot"></span>
+        <span class="road-phase">2026 Q3</span>
+        <h3>正式公测</h3>
+        <p>App 端发布，信用体系与 AI 匹配全量上线，覆盖全校。</p>
+        <ul><li>用户破万</li><li>校园门店开业</li></ul>
+      </li>
+      <li class="road-item" data-delay="270">
+        <span class="road-dot"></span>
+        <span class="road-phase">2026 Q4+</span>
+        <h3>多校复制</h3>
+        <p>模式标准化输出，向同城高校复制，构建区域校园网络。</p>
+        <ul><li>3-5 所兄弟院校</li><li>跨校拼单互通</li></ul>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<style>
+  .road { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; position: relative; counter-reset: step; }
+  .road::before {
+    content: ""; position: absolute; top: 17px; left: 4%; right: 4%;
+    border-top: 3px dashed rgba(28, 23, 51, .3);
+  }
+  .road-item {
+    position: relative; background: #fff; border: 2.5px solid var(--ink);
+    border-radius: var(--radius); padding: 46px 20px 20px;
+    box-shadow: var(--shadow-hard); transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out);
+  }
+  .road-item:hover { transform: translateY(-5px) rotate(-.5deg); box-shadow: var(--shadow-hard-xl); }
+  .road-dot {
+    position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+    width: 30px; height: 30px; border-radius: 50%;
+    background: #fff; border: 2.5px solid var(--ink);
+  }
+  .road-dot::after {
+    content: ""; position: absolute; inset: 6px; border-radius: 50%;
+    background: rgba(28, 23, 51, .2);
+  }
+  .road-item.done .road-dot::after { background: var(--mint); }
+  .road-item.active { border-color: var(--tangerine); }
+  .road-item.active .road-dot { animation: dotPulse 1.6s ease-in-out infinite; }
+  .road-item.active .road-dot::after { background: var(--tangerine); }
+  @keyframes dotPulse { 50% { box-shadow: 0 0 0 8px rgba(255, 122, 69, .28); } }
+  .road-phase {
+    position: absolute; top: 20px; right: 16px;
+    font-family: var(--font-latin); font-size: 12px; font-weight: 800;
+    background: var(--cream-2); border: 2px solid var(--ink); border-radius: 999px; padding: 1px 10px;
+  }
+  .road-item.active .road-phase { background: var(--sun); }
+  .road-item h3 { font-family: var(--font-zh); font-weight: 400; font-size: 21px; letter-spacing: 1px; margin-bottom: 6px; }
+  .road-item p { font-size: 13.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.6; }
+  .road-item ul { list-style: none; margin-top: 10px; display: grid; gap: 4px; border-top: 2px dashed rgba(28,23,51,.15); padding-top: 10px; }
+  .road-item li { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); padding-left: 16px; position: relative; }
+  .road-item li::before { content: "▹"; position: absolute; left: 0; color: var(--tangerine); }
+
+  @media (max-width: 920px) {
+    .road { grid-template-columns: 1fr; gap: 26px; max-width: 520px; margin: 0 auto; }
+    .road::before { top: 4%; bottom: 4%; left: 15px; right: auto; border-top: 0; border-left: 3px dashed rgba(28,23,51,.3); }
+    .road-dot { left: -33px; top: 22px; transform: none; }
+  }
+</style>

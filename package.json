@@ -1,0 +1,20 @@
+{
+  "name": "school-mate",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "School Mate 校园搭子 — 大学生轻交易 · 分享平台官网（Astro 静态站点）",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "astro build && npx wrangler pages deploy dist --project-name school-mate"
+  },
+  "engines": {
+    "node": ">=18.14.1"
+  },
+  "dependencies": {
+    "astro": "^4.16.0"
+  }
+}

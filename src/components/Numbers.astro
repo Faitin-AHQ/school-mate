@@ -1,0 +1,52 @@
+---
+// 数据墙：深色横幅 + 大号滚动数字（计数动画由 Layout 脚本驱动）
+---
+<section class="section-dark band" id="numbers">
+  <div class="container">
+    <div class="band-grid">
+      <div class="band-item" data-delay="0">
+        <div class="band-num"><b data-count="12000">0</b><i>+</i></div>
+        <span class="band-label">首批目标用户</span>
+        <small>覆盖全校本研各年级</small>
+      </div>
+      <div class="band-item" data-delay="90">
+        <div class="band-num"><b data-count="4">0</b><i>端</i></div>
+        <span class="band-label">全场景覆盖</span>
+        <small>Web · 小程序 · App · 线下门店</small>
+      </div>
+      <div class="band-item" data-delay="180">
+        <div class="band-num"><b data-count="30">0</b><i>+</i></div>
+        <span class="band-label">交易品类</span>
+        <small>教材 · 拼单 · 技能 · 出行</small>
+      </div>
+      <div class="band-item" data-delay="270">
+        <div class="band-num"><b data-count="0">0</b><i>佣金</i></div>
+        <span class="band-label">学生友好定价</span>
+        <small>冷启动期全程免佣</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .band { padding: 46px 0; position: relative; z-index: 2; }
+  .band-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; text-align: center; }
+  .band-item { position: relative; padding: 8px 6px; }
+  .band-item + .band-item::before {
+    content: ""; position: absolute; left: -11px; top: 15%; height: 70%;
+    border-left: 2px dashed rgba(255, 246, 233, .25);
+  }
+  .band-num { display: flex; align-items: baseline; justify-content: center; gap: 4px; line-height: 1; }
+  .band-num b {
+    font-family: var(--font-latin); font-size: clamp(34px, 4.5vw, 52px); font-weight: 800;
+    color: var(--sun); font-variant-numeric: tabular-nums;
+    text-shadow: 3px 3px 0 rgba(255, 122, 69, .55);
+  }
+  .band-num i { font-style: normal; font-family: var(--font-zh); font-size: 17px; color: var(--tangerine); }
+  .band-label { display: block; font-family: var(--font-zh); font-size: 16px; letter-spacing: 1px; margin-top: 8px; }
+  .band-item small { display: block; font-size: 12px; color: #b9b2d6; font-weight: 500; margin-top: 2px; }
+  @media (max-width: 920px) {
+    .band-grid { grid-template-columns: repeat(2, 1fr); gap: 26px 14px; }
+    .band-item:nth-child(odd)::before { display: none; }
+  }
+</style>

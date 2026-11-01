@@ -1,0 +1,169 @@
+---
+// 通用粒子画布：星座连线 + 鼠标引力 + 点击涟漪
+// 用法：<Particles density={9000} link={120} />  置于 position:relative 容器内
+// 性能：DPR 适配、离屏暂停（IntersectionObserver）、降低动效时静态渲染一帧
+interface Props {
+  density?: number; // 每多少平方像素 1 个粒子
+  link?: number;    // 连线距离
+  dark?: boolean;   // 深色底上使用亮色粒子
+}
+const { density = 9000, link = 120, dark = false } = Astro.props;
+const palette = dark
+  ? ['#FFC53D', '#FF6FA5', '#21D4A8', '#8FB7FF', '#C9B8FF']
+  : ['#7C5CFF', '#FF7A45', '#3E8BFF', '#21D4A8', '#FF6FA5', '#FFC53D'];
+---
+<canvas
+  class="particles"
+  data-particles
+  data-density={density}
+  data-link={link}
+  data-dark={dark ? '1' : ''}
+  data-palette={palette.join(',')}
+  aria-hidden="true"
+></canvas>
+
+<script>
+  interface P {
+    x: number; y: number; vx: number; vy: number;
+    r: number; c: string; a: number;
+  }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+  document.querySelectorAll<HTMLCanvasElement>('canvas[data-particles]').forEach((canvas) => {
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const palette = (canvas.dataset.palette || '#7C5CFF').split(',');
+    const density = Number(canvas.dataset.density) || 9000;
+    const LINK = Number(canvas.dataset.link) || 120;
+    const dark = canvas.dataset.dark === '1';
+
+    let w = 0, h = 0, dpr = 1;
+    let particles: P[] = [];
+    let running = false;
+    let raf = 0;
+    const mouse = { x: -9999, y: -9999 };
+    const ripples: { x: number; y: number; r: number; a: number }[] = [];
+
+    function resize() {
+      const rect = canvas.parentElement!.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = rect.width; h = rect.height;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+      seed();
+    }
+
+    function seed() {
+      const count = Math.round((w * h) / density);
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: 1.6 + Math.random() * 2.4,
+        c: palette[Math.floor(Math.random() * palette.length)],
+        a: 0.5 + Math.random() * 0.5,
+      }));
+    }
+
+    function step() {
+      ctx!.clearRect(0, 0, w, h);
+
+      // 连线
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x, dy = p.y - q.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < LINK * LINK) {
+            const t = 1 - Math.sqrt(d2) / LINK;
+            ctx!.globalAlpha = t * (dark ? 0.28 : 0.16);
+            ctx!.strokeStyle = dark ? '#FFF6E9' : '#1C1733';
+            ctx!.lineWidth = 1;
+            ctx!.beginPath();
+            ctx!.moveTo(p.x, p.y);
+            ctx!.lineTo(q.x, q.y);
+            ctx!.stroke();
+          }
+        }
+      }
+
+      // 粒子
+      for (const p of particles) {
+        // 鼠标引力：靠近时轻轻推开
+        const dx = p.x - mouse.x, dy = p.y - mouse.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < 150 * 150 && d2 > 0.01) {
+          const d = Math.sqrt(d2);
+          const f = ((150 - d) / 150) * 0.6;
+          p.vx += (dx / d) * f * 0.12;
+          p.vy += (dy / d) * f * 0.12;
+        }
+        // 阻尼 + 限速
+        p.vx *= 0.985; p.vy *= 0.985;
+        const sp = Math.hypot(p.vx, p.vy);
+        if (sp > 1.4) { p.vx = (p.vx / sp) * 1.4; p.vy = (p.vy / sp) * 1.4; }
+        p.x += p.vx; p.y += p.vy;
+        // 边缘回绕
+        if (p.x < -10) p.x = w + 10; else if (p.x > w + 10) p.x = -10;
+        if (p.y < -10) p.y = h + 10; else if (p.y > h + 10) p.y = -10;
+
+        ctx!.globalAlpha = p.a;
+        ctx!.fillStyle = p.c;
+        ctx!.beginPath();
+        ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx!.fill();
+      }
+
+      // 点击涟漪
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const rp = ripples[i];
+        rp.r += 2.6; rp.a -= 0.02;
+        if (rp.a <= 0) { ripples.splice(i, 1); continue; }
+        ctx!.globalAlpha = rp.a;
+        ctx!.strokeStyle = dark ? '#FFC53D' : '#7C5CFF';
+        ctx!.lineWidth = 2;
+        ctx!.beginPath();
+        ctx!.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+        ctx!.stroke();
+      }
+
+      ctx!.globalAlpha = 1;
+      if (running) raf = requestAnimationFrame(step);
+    }
+
+    function start() { if (!running && !reduceMotion) { running = true; raf = requestAnimationFrame(step); } }
+    function stop() { running = false; cancelAnimationFrame(raf); }
+
+    resize();
+    if (reduceMotion) {
+      step(); // 静态渲染一帧
+    } else {
+      // 仅可见时运行
+      new IntersectionObserver((entries) => {
+        entries.forEach((e) => (e.isIntersecting ? start() : stop()));
+      }, { threshold: 0.02 }).observe(canvas);
+    }
+
+    window.addEventListener('resize', () => { resize(); if (reduceMotion) step(); });
+
+    const host = canvas.parentElement!;
+    if (finePointer) {
+      host.addEventListener('pointermove', (e) => {
+        const r = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - r.left;
+        mouse.y = e.clientY - r.top;
+      });
+      host.addEventListener('pointerleave', () => { mouse.x = -9999; mouse.y = -9999; });
+      host.addEventListener('pointerdown', (e) => {
+        const r = canvas.getBoundingClientRect();
+        ripples.push({ x: e.clientX - r.left, y: e.clientY - r.top, r: 6, a: 0.55 });
+      });
+    }
+  });
+</script>

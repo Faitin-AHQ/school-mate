@@ -1,0 +1,84 @@
+---
+// 页脚：品牌 + 站点地图 + 联系方式（二维码）
+---
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="brand-row">
+        <img class="footer-logo" src="/images/logo.png" alt="School Mate" />
+        <b>School Mate</b>
+      </div>
+      <p>校园搭子 · 大学生轻交易分享平台。用校园社交的信任做底座，让闲置与需求在同校连接起来。</p>
+      <span class="footer-badge">辽宁工程技术大学 · 创新创业计划</span>
+    </div>
+
+    <nav class="footer-col" aria-label="站点地图">
+      <h4>快速导航</h4>
+      <a href="#about">关于项目</a>
+      <a href="#features">功能矩阵</a>
+      <a href="#platforms">项目构成</a>
+      <a href="#roadmap">发展路线</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+
+    <div class="footer-col">
+      <h4>联系我们</h4>
+      <div class="qr-row">
+        <img class="footer-qr" src="/images/qrcode.png" alt="School Mate 咨询二维码" />
+        <div class="qr-text">
+          <b>扫码咨询 / 加入内测群</b>
+          <small>工作日 9:00 - 21:00 在线</small>
+          <small>校园创业团队 · 欢迎共建</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 School Mate. 草稿演示版</span>
+    <span>用 <em>♥</em> 与校园信任构建</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--ink); color: #d9d4ee; padding: 54px 0 0;
+    position: relative; z-index: 2; border-top: 2.5px solid var(--ink);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 1.4fr .8fr 1fr; gap: 40px;
+    padding-bottom: 36px;
+  }
+  .brand-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .brand-row b { font-family: var(--font-latin); font-size: 20px; color: #fff; }
+  .footer-logo { width: 42px; height: 42px; border-radius: 12px; border: 2.5px solid #fff; }
+  .footer-brand p { font-size: 13.5px; line-height: 1.7; max-width: 340px; opacity: .85; }
+  .footer-badge {
+    display: inline-block; margin-top: 14px; font-size: 12px; font-weight: 700;
+    border: 2px dashed rgba(255, 246, 233, .4); border-radius: 999px; padding: 4px 12px;
+    color: var(--sun);
+  }
+  .footer-col h4 {
+    font-family: var(--font-zh); font-weight: 400; font-size: 16px;
+    letter-spacing: 1px; color: #fff; margin-bottom: 14px;
+  }
+  .footer-col a { display: block; font-size: 13.5px; padding: 3px 0; opacity: .8; transition: opacity .2s, transform .2s; }
+  .footer-col a:hover { opacity: 1; transform: translateX(4px); color: var(--sun); }
+  .qr-row { display: flex; gap: 14px; align-items: center; }
+  .footer-qr {
+    width: 92px; height: 92px; border-radius: 14px;
+    border: 2.5px solid #fff; background: #fff; padding: 4px;
+  }
+  .qr-text b { display: block; font-size: 13px; color: #fff; margin-bottom: 4px; }
+  .qr-text small { display: block; font-size: 12px; opacity: .7; line-height: 1.6; }
+  .footer-bottom {
+    display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    border-top: 1px solid rgba(255, 246, 233, .15);
+    padding-top: 16px; padding-bottom: 18px;
+    font-size: 12.5px; opacity: .65;
+  }
+  .footer-bottom em { color: var(--pink); }
+
+  @media (max-width: 860px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+</style>

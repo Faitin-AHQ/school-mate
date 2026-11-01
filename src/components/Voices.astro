@@ -1,0 +1,75 @@
+---
+// 用户声音：内测候选用户证言卡片
+---
+<section class="section section-cream" id="voices">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">VOICES · 用户声音</span>
+      <h2>先听听同学们怎么说</h2>
+      <p>来自需求调研与内测候补名单的真实反馈。</p>
+    </div>
+
+    <div class="voices">
+      <figure class="voice-card" data-delay="0">
+        <span class="quote-mark">”</span>
+        <blockquote>在狐友圈买二手教材被鸽过两次，要是真有同校实名加担保，我第一个用。</blockquote>
+        <figcaption>
+          <span class="v-avatar" style="--bg:var(--sky)">王</span>
+          <span><b>王同学</b><small>机械学院 · 大三</small></span>
+          <span class="v-tag">二手流转</span>
+        </figcaption>
+      </figure>
+      <figure class="voice-card tilted" data-delay="90">
+        <span class="quote-mark">”</span>
+        <blockquote>奶茶拼单群里天天刷屏凑人，能一键成团还自动分账的话，群主直接失业。</blockquote>
+        <figcaption>
+          <span class="v-avatar" style="--bg:var(--tangerine)">李</span>
+          <span><b>李同学</b><small>管理学院 · 大二</small></span>
+          <span class="v-tag">拼单团购</span>
+        </figcaption>
+      </figure>
+      <figure class="voice-card" data-delay="180">
+        <span class="quote-mark">”</span>
+        <blockquote>考研想找同目标的搭子互相监督，但大平台全是广告，校园内的就放心多了。</blockquote>
+        <figcaption>
+          <span class="v-avatar" style="--bg:var(--grape)">赵</span>
+          <span><b>赵同学</b><small>土木学院 · 大四</small></span>
+          <span class="v-tag">考研搭子</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .voices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .voice-card {
+    position: relative; background: #fff; border: 2.5px solid var(--ink);
+    border-radius: var(--radius); padding: 26px 24px 20px;
+    box-shadow: var(--shadow-hard-lg); display: flex; flex-direction: column; gap: 14px;
+    transition: transform .25s var(--ease-spring), box-shadow .25s;
+  }
+  .voice-card:hover { transform: translateY(-6px) rotate(1deg); box-shadow: var(--shadow-hard-xl); }
+  .voice-card.tilted { transform: rotate(-1.2deg); }
+  .voice-card.tilted:hover { transform: translateY(-6px) rotate(-.2deg); }
+  .quote-mark {
+    position: absolute; top: -6px; right: 18px;
+    font-family: var(--font-zh); font-size: 84px; line-height: 1;
+    color: var(--sun); -webkit-text-stroke: 2px var(--ink);
+  }
+  .voice-card blockquote { font-size: 15px; font-weight: 600; line-height: 1.75; color: var(--ink); }
+  .voice-card figcaption { display: flex; align-items: center; gap: 10px; margin-top: auto; border-top: 2px dashed rgba(28,23,51,.15); padding-top: 14px; }
+  .v-avatar {
+    width: 42px; height: 42px; border-radius: 50%; flex: none;
+    display: grid; place-items: center; font-weight: 800; color: #fff;
+    background: var(--bg, var(--sky)); border: 2.5px solid var(--ink);
+  }
+  .voice-card figcaption b { display: block; font-size: 14.5px; }
+  .voice-card figcaption small { display: block; font-size: 12px; color: var(--ink-soft); font-weight: 600; }
+  .v-tag {
+    margin-left: auto; font-size: 11.5px; font-weight: 800;
+    background: var(--cream-2); border: 2px solid var(--ink);
+    border-radius: 999px; padding: 2px 10px; white-space: nowrap;
+  }
+  @media (max-width: 920px) { .voices { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; } .voice-card.tilted { transform: none; } }
+</style>

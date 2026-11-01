@@ -1,0 +1,63 @@
+---
+// 顶部导航：品牌 + 锚点导航 + 移动端汉堡菜单
+// 行为（阴影、scrollspy、菜单开合）由 Layout 脚本统一驱动
+---
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top">
+      <img alt="School Mate Logo" class="brand-logo" src="/images/logo.png" />
+      <span class="brand-name">School&nbsp;Mate</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a class="active" href="#about">关于</a>
+      <a href="#features">功能矩阵</a>
+      <a href="#platforms">项目构成</a>
+      <a href="#compare">竞品对比</a>
+      <a href="#roadmap">发展路线</a>
+      <a href="#voices">用户声音</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-ink btn-sm" href="#join">加入我们</a>
+      <button aria-expanded="false" aria-label="菜单" class="nav-toggle" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 246, 233, 0.8); backdrop-filter: blur(10px);
+    border-bottom: 2.5px solid transparent; transition: border-color .3s, box-shadow .3s;
+  }
+  .nav.scrolled { border-color: var(--ink); box-shadow: 0 4px 0 rgba(28, 23, 51, 0.06); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-latin); font-weight: 800; font-size: 20px; }
+  .brand-logo { width: 38px; height: 38px; border-radius: 12px; border: 2.5px solid var(--ink); }
+  .brand-name { letter-spacing: 0.3px; }
+  .nav-links { display: flex; gap: 20px; }
+  .nav-links a { font-size: 14.5px; font-weight: 700; color: var(--ink-soft); position: relative; padding: 4px 2px; transition: color .2s; }
+  .nav-links a::after { content: ""; position: absolute; left: 0; bottom: -2px; height: 3px; width: 0; background: var(--tangerine); transition: width .25s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-links a.active::after { width: 100%; }
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
+  .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: 0; cursor: pointer; padding: 8px; }
+  .nav-toggle span { width: 24px; height: 3px; background: var(--ink); border-radius: 2px; }
+
+  @media (max-width: 920px) {
+    .nav-links {
+      position: fixed; inset: 72px 0 auto 0; flex-direction: column;
+      background: var(--cream); padding: 22px 30px; gap: 18px;
+      border-bottom: 2.5px solid var(--ink); box-shadow: var(--shadow-hard);
+      transform: translateY(-140%); transition: transform .3s;
+    }
+    .nav-links.open { transform: translateY(0); }
+    .nav-toggle { display: flex; }
+  }
+  @media (max-width: 560px) {
+    .nav-actions .btn { display: none; }
+    .brand-name { font-size: 17px; }
+  }
+</style>

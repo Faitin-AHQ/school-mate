@@ -1,0 +1,79 @@
+---
+// 竞品对比表
+---
+<section class="section section-cream" id="compare">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">COMPARE · 竞品对比</span>
+      <h2>差异，一眼可见</h2>
+    </div>
+    <div class="table-wrap">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th class="col-us">School Mate</th>
+            <th>狐友圈子（微信内）</th>
+            <th>闲鱼</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>监管力度</td>
+            <td class="col-us">校园实名 + 信用体系</td>
+            <td class="bad">监管极松</td>
+            <td class="bad">监管不严</td>
+          </tr>
+          <tr>
+            <td>交易防护</td>
+            <td class="col-us">网银级防护 · 担保交易</td>
+            <td class="bad">无网银防护</td>
+            <td>基础保护</td>
+          </tr>
+          <tr>
+            <td>关系链</td>
+            <td class="col-us">校园搭子 · 熟人网络</td>
+            <td>自发性群体</td>
+            <td class="bad">陌生人交易</td>
+          </tr>
+          <tr>
+            <td>履约方式</td>
+            <td class="col-us">自提 · 当面交割</td>
+            <td class="bad">无履约保障</td>
+            <td>快递邮寄为主</td>
+          </tr>
+          <tr>
+            <td>覆盖范围</td>
+            <td class="col-us">同校同城 · 精准</td>
+            <td>自发性群体</td>
+            <td class="bad">全国性 · 不便</td>
+          </tr>
+          <tr>
+            <td>价格体系</td>
+            <td class="col-us">学生友好定价 · 0 佣金起步</td>
+            <td>—</td>
+            <td class="bad">价格偏高</td>
+          </tr>
+          <tr>
+            <td>线下延伸</td>
+            <td class="col-us">✓ 门店赋能</td>
+            <td class="bad">✗</td>
+            <td class="bad">90% 纯线上</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .table-wrap { background: #fff; border: 2.5px solid var(--ink); border-radius: var(--radius); box-shadow: var(--shadow-hard-lg); overflow: hidden; }
+  .compare { width: 100%; border-collapse: collapse; }
+  .compare th, .compare td { padding: 12px 14px; text-align: center; border-bottom: 2.5px solid var(--ink); font-size: 14.5px; }
+  .compare thead th { background: var(--cream); font-family: var(--font-zh); font-weight: 400; font-size: 17px; letter-spacing: 1px; }
+  .compare tbody td:first-child { text-align: left; font-weight: 800; }
+  .compare .col-us { background: var(--sun); font-weight: 800; }
+  .compare thead .col-us { background: var(--tangerine); color: #fff; }
+  .compare .bad { color: var(--tangerine); font-weight: 800; }
+  @media (max-width: 560px) { .compare th, .compare td { padding: 11px 8px; font-size: 12px; } }
+</style>

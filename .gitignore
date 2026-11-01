@@ -1,0 +1,32 @@
+# 依赖与构建产物
+node_modules/
+dist/
+.astro/
+
+# 日志
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 环境变量（勿提交任何密钥）
+.env
+.env.production
+.env*.local
+
+# Cloudflare / Wrangler
+.wrangler/
+.dev.vars
+
+# 编辑器与操作系统
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+
+# 历史素材解包目录与一次性脚本（仅本地参考，不纳入仓库）
+_extract/
+_extract_script.cjs
+/assets/
+/logo.png
+/qrcode.png

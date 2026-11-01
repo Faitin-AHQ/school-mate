@@ -1,0 +1,82 @@
+---
+// 项目构成：四端 Tab 切换（Web / 小程序 / App / 线下）
+// Tab 切换逻辑由 Layout 脚本统一驱动
+---
+<section class="section section-cream" id="platforms">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">PLATFORMS · 项目构成</span>
+      <h2>四位一体，全场景触达</h2>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="web" role="tab">🌐 Web 端</button>
+      <button class="tab" data-tab="mp" role="tab">🟢 小程序端</button>
+      <button class="tab" data-tab="app" role="tab">📱 App 端</button>
+      <button class="tab" data-tab="off" role="tab">🏪 线下端</button>
+    </div>
+    <div class="tab-panels">
+      <div class="tab-panel active" data-panel="web">
+        <div class="panel-ico ico-web">🌐</div>
+        <h3>Web 端 · 运营中枢</h3>
+        <p>功能最完整的桌面站点，承载发布、管理、数据与后台运营，是项目的控制塔。</p>
+        <ul class="panel-list">
+          <li>商品 / 服务发布与审核流</li>
+          <li>后台数据看板与 AI 群体分析</li>
+          <li>校园门店管理与履约追踪</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-panel="mp">
+        <div class="panel-ico ico-mp">🟢</div>
+        <h3>小程序端 · 即用即走</h3>
+        <p>无需下载，覆盖校内高频轻交易与拼单场景，是触达学生的最高频入口。</p>
+        <ul class="panel-list">
+          <li>微信生态内一键登录</li>
+          <li>拼单、二手、顺风车快速发布</li>
+          <li>同校推荐与信用背书</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-panel="app">
+        <div class="panel-ico ico-app">📱</div>
+        <h3>App 端 · 深度沉浸</h3>
+        <p>沉浸式体验与推送能力，沉淀用户关系，建立长期粘性与社区氛围。</p>
+        <ul class="panel-list">
+          <li>消息推送与搭子动态</li>
+          <li>兴趣社群与活动组局</li>
+          <li>成长体系与信用积分</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-panel="off">
+        <div class="panel-ico ico-off">🏪</div>
+        <h3>线下端 · 信任落地</h3>
+        <p>可扩展至校园门店，把线上信任落地为线下影响力与履约保障。</p>
+        <ul class="panel-list">
+          <li>线下自提与当面交易</li>
+          <li>校园快闪与社团合作</li>
+          <li>本地化品牌曝光</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tabs { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px; }
+  .tab { padding: 12px 22px; border-radius: 999px; border: 2.5px solid var(--ink); background: #fff; font-size: 15px; font-weight: 800; color: var(--ink); cursor: pointer; transition: all .18s; font-family: var(--font-body); box-shadow: 3px 3px 0 var(--ink); }
+  .tab:hover { transform: translate(-1px, -1px); }
+  .tab.active { background: var(--tangerine); transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+  .tab-panels { position: relative; }
+  .tab-panel { display: none; background: #fff; border: 2.5px solid var(--ink); border-radius: var(--radius); padding: 30px 34px; box-shadow: var(--shadow-hard-lg); animation: pop .35s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes pop { from { opacity: 0; transform: scale(.97) translateY(8px); } to { opacity: 1; transform: none; } }
+  .panel-ico { width: 66px; height: 66px; border-radius: 18px; display: grid; place-items: center; font-size: 32px; margin-bottom: 18px; border: 2.5px solid var(--ink); }
+  .panel-ico.ico-web { background: var(--sky); }
+  .panel-ico.ico-mp { background: var(--mint); }
+  .panel-ico.ico-app { background: var(--sun); }
+  .panel-ico.ico-off { background: var(--pink); }
+  .tab-panel h3 { font-family: var(--font-zh); font-size: 26px; font-weight: 400; margin-bottom: 10px; letter-spacing: 1px; }
+  .tab-panel p { color: var(--ink-soft); margin-bottom: 18px; max-width: 620px; font-weight: 500; }
+  .panel-list { list-style: none; display: grid; gap: 10px; }
+  .panel-list li { position: relative; padding-left: 30px; font-weight: 600; }
+  .panel-list li::before { content: "✓"; position: absolute; left: 0; top: 1px; width: 20px; height: 20px; border-radius: 50%; background: var(--mint); border: 2px solid var(--ink); color: var(--ink); font-size: 11px; display: grid; place-items: center; font-weight: 900; }
+  @media (max-width: 560px) { .tab-panel { padding: 26px 20px; } }
+</style>

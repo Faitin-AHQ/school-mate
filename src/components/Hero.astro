@@ -1,0 +1,184 @@
+---
+// 首屏 Hero：粒子星座背景 + 文案 + 打字机 + 数据面板 + 手机演示（3D 倾斜）
+// 交互（打字机、数字滚动、倾斜、贴纸视差）由 Layout 脚本驱动
+import Particles from './Particles.astro';
+---
+<section class="hero">
+  <Particles density={11000} link={110} />
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <span class="pill"><i class="pulse-dot"></i>大学生轻交易 · 分享平台</span>
+      <h1 class="hero-title">
+        <span class="t-latin">School Mate</span><br />
+        <span class="t-zh">校园<b>搭子</b></span>
+      </h1>
+      <p class="hero-sub" id="typed"></p>
+      <div class="hero-cta">
+        <a class="btn btn-ink" data-magnetic href="#join">立即体验</a>
+        <a class="btn btn-sticker" data-magnetic href="#features">了解项目 ▾</a>
+      </div>
+      <p class="hero-note">
+        <b>📍 辽宁工程技术大学</b>· 创新创业计划孵化中<b>· 内测报名开放</b>
+      </p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num"><b data-count="4">0</b><i>端</i></div>
+          <span class="stat-label">多端覆盖</span>
+          <small>Web · 小程序 · App · 线下</small>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><b data-count="100">0</b><i>%</i></div>
+          <span class="stat-label">校园实名认证</span>
+          <small>信用体系 · 担保交易</small>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><b data-count="90">0</b><i>%</i></div>
+          <span class="stat-label">闲鱼纯线上占比</span>
+          <small>痛点对标 · 我们补线下</small>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><b data-count="1">0</b><i>校</i></div>
+          <span class="stat-label">信任半径</span>
+          <small>同校同城 · 当面履约</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="tilt-wrap">
+        <div class="device" id="device">
+          <div class="device-screen">
+            <div class="app-top">
+              <span class="app-avatar"></span>
+              <div class="app-top-text">
+                <i>校园搭子</i>
+                <small>附近 · 同校 12 人在线</small>
+              </div>
+            </div>
+            <div class="card-row">
+              <div class="mini-card c-yellow">
+                <span class="tag">二手</span>
+                <p>考研资料打包出</p>
+                <b>¥ 35</b>
+              </div>
+              <div class="mini-card c-blue">
+                <span class="tag">拼单</span>
+                <p>奶茶拼单 5 人成</p>
+                <b>省 40%</b>
+              </div>
+            </div>
+            <div class="skill-row">
+              <span class="chip">摄影约拍</span>
+              <span class="chip">期末答疑</span>
+              <span class="chip">顺风车</span>
+              <span class="chip">考研搭子</span>
+            </div>
+            <div class="hi-five">
+              <span class="hand">🤝</span>
+              <small>和你的搭子，击个掌</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="float-sticker fs-1">🔥 校内拼单</div>
+      <div class="float-sticker fs-2">🛡️ 担保交易</div>
+      <div class="float-sticker fs-3">⚡ 秒级匹配</div>
+    </div>
+  </div>
+  <a class="scroll-hint" href="#about" aria-label="向下滚动">
+    <span class="mouse"><i></i></span>
+    <small>下滑探索</small>
+  </a>
+</section>
+
+<style>
+  .hero { position: relative; padding: 52px 0 76px; z-index: 2; overflow: hidden; }
+  .hero .particles { z-index: 0; }
+  .hero-inner { position: relative; z-index: 1; }
+
+  /* Hero 载入错峰入场（仅 .js 下生效，无 JS 也能正常显示） */
+  .js .hero-copy > * { animation: heroRise .7s cubic-bezier(.2, .7, .3, 1) both; }
+  .js .hero-copy > *:nth-child(1) { animation-delay: .05s; }
+  .js .hero-copy > *:nth-child(2) { animation-delay: .15s; }
+  .js .hero-copy > *:nth-child(3) { animation-delay: .25s; }
+  .js .hero-copy > *:nth-child(4) { animation-delay: .35s; }
+  .js .hero-copy > *:nth-child(5) { animation-delay: .45s; }
+  .js .hero-copy > *:nth-child(6) { animation-delay: .55s; }
+  .js .hero-visual { animation: heroRise .8s cubic-bezier(.2, .7, .3, 1) both .2s; }
+  @keyframes heroRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+
+  .hero-inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 2.5px solid var(--ink); padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 800; color: var(--ink); box-shadow: 3px 3px 0 var(--ink); }
+  .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); animation: dotBreath 1.8s ease-in-out infinite; }
+  @keyframes dotBreath { 50% { box-shadow: 0 0 0 5px rgba(33, 212, 168, .3); } }
+  .hero-title { font-family: var(--font-zh); font-size: clamp(44px, 6.5vw, 76px); line-height: 1.05; font-weight: 400; margin: 18px 0 12px; letter-spacing: 1px; }
+  .t-latin { display: inline-block; font-family: var(--font-latin); font-weight: 800; color: var(--grape); -webkit-text-stroke: 2px var(--ink); text-shadow: 3px 3px 0 var(--sun); }
+  .t-zh { display: inline-block; color: var(--ink); }
+  .t-zh b { color: var(--tangerine); -webkit-text-stroke: 1.5px var(--ink); }
+  .hero-sub { font-size: 18px; color: var(--ink-soft); max-width: 520px; min-height: 56px; font-weight: 500; }
+  .hero-sub .caret { display: inline-block; width: 2px; height: 1.05em; background: var(--tangerine); margin-left: 2px; vertical-align: text-bottom; animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .hero-cta { display: flex; gap: 14px; margin: 22px 0 16px; flex-wrap: wrap; }
+  .hero-note { font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-bottom: 16px; }
+  .hero-note b { color: var(--ink); font-weight: 800; }
+
+  /* 数据面板：数字/单位分离 + 等宽数字，动画时不抖动 */
+  .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 18px; max-width: 470px; background: rgba(255,255,255,.85); backdrop-filter: blur(4px); border: 2.5px solid var(--ink); border-radius: 20px; padding: 14px 16px; box-shadow: var(--shadow-hard); }
+  .stat { padding: 7px 4px; }
+  .stat:nth-child(n + 3) { border-top: 2px dashed rgba(28, 23, 51, .18); }
+  .stat:nth-child(even) { border-left: 2px dashed rgba(28, 23, 51, .18); padding-left: 16px; }
+  .stat-num { display: flex; align-items: baseline; gap: 4px; line-height: 1; }
+  .stat-num b { font-family: var(--font-latin); font-size: 27px; font-weight: 800; color: var(--grape); font-variant-numeric: tabular-nums; }
+  .stat-num i { font-style: normal; font-family: var(--font-latin); font-weight: 800; font-size: 16px; color: var(--tangerine); }
+  .stat-label { display: block; font-size: 13px; font-weight: 800; color: var(--ink); margin-top: 5px; }
+  .stat small { display: block; font-size: 11.5px; font-weight: 600; color: var(--ink-soft); line-height: 1.45; margin-top: 1px; }
+
+  /* Hero 视觉 */
+  .hero-visual { display: flex; justify-content: center; position: relative; perspective: 1000px; }
+  .tilt-wrap { transform-style: preserve-3d; }
+  .device { width: 300px; padding: 16px; border-radius: 44px; background: var(--ink); border: 3px solid var(--ink); box-shadow: var(--shadow-hard-lg); transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .15s ease-out; will-change: transform; }
+  .device-screen { background: var(--cream); border-radius: 30px; padding: 20px 18px; min-height: 470px; display: flex; flex-direction: column; gap: 14px; border: 2.5px solid var(--ink); }
+  .app-top { display: flex; align-items: center; gap: 12px; }
+  .app-avatar { width: 42px; height: 42px; border-radius: 14px; background: var(--grape); border: 2.5px solid var(--ink); flex: none; }
+  .app-top-text i { font-style: normal; font-weight: 800; font-size: 16px; display: block; }
+  .app-top-text small { color: var(--ink-soft); font-size: 12px; }
+  .card-row { display: flex; gap: 12px; }
+  .mini-card { flex: 1; background: #fff; border-radius: 16px; padding: 12px; border: 2.5px solid var(--ink); }
+  .mini-card.c-yellow { box-shadow: 3px 3px 0 var(--sun); }
+  .mini-card.c-blue { box-shadow: 3px 3px 0 var(--sky); }
+  .mini-card p { font-size: 13px; margin: 8px 0 4px; font-weight: 600; }
+  .mini-card b { color: var(--grape); font-size: 15px; font-family: var(--font-latin); }
+  .tag { display: inline-block; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 999px; background: var(--mint); border: 2px solid var(--ink); color: var(--ink); }
+  .skill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-size: 12px; font-weight: 700; background: #fff; border: 2px solid var(--ink); padding: 5px 11px; border-radius: 999px; }
+  .hi-five { margin-top: auto; text-align: center; padding-top: 10px; }
+  .hi-five .hand { font-size: 40px; display: inline-block; animation: shake 2.4s ease-in-out infinite; }
+  .hi-five small { display: block; font-size: 12px; font-weight: 700; color: var(--ink-soft); }
+  @keyframes shake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-12deg); } 75% { transform: rotate(12deg); } }
+
+  .float-sticker { position: absolute; background: #fff; border: 2.5px solid var(--ink); padding: 9px 14px; border-radius: 14px; font-size: 13px; font-weight: 800; box-shadow: var(--shadow-hard); will-change: translate; }
+  .fs-1 { top: 4%; left: -8%; background: var(--sun); animation: bob 4s ease-in-out infinite; }
+  .fs-2 { bottom: 20%; left: -14%; background: var(--mint); animation: bob 4s ease-in-out infinite .6s; }
+  .fs-3 { top: 28%; right: -12%; background: var(--pink); color: #fff; animation: bob 4s ease-in-out infinite 1.2s; }
+  @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
+
+  /* 下滑提示 */
+  .scroll-hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--ink-soft); }
+  .scroll-hint small { font-size: 11px; font-weight: 700; letter-spacing: 2px; }
+  .mouse { width: 24px; height: 38px; border: 2.5px solid var(--ink); border-radius: 14px; display: flex; justify-content: center; padding-top: 6px; background: rgba(255,255,255,.7); }
+  .mouse i { width: 4px; height: 8px; border-radius: 3px; background: var(--tangerine); animation: wheel 1.6s ease-in-out infinite; }
+  @keyframes wheel { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(12px); opacity: 0; } 100% { opacity: 0; } }
+
+  @media (max-width: 920px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { order: -1; }
+    .float-sticker { display: none; }
+    .scroll-hint { display: none; }
+  }
+  @media (max-width: 560px) {
+    .device { width: min(300px, calc(100vw - 72px)); }
+    .hero-stats { max-width: none; padding: 12px 14px; }
+    .stat-num b { font-size: 23px; }
+    .stat small { font-size: 11px; }
+  }
+</style>

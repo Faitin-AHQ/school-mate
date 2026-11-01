@@ -1,0 +1,233 @@
+---
+// 功能矩阵：Bento 网格，六张不同尺寸卡片，内嵌纯 CSS/SVG 微可视化
+---
+<section class="section section-cream" id="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">FEATURES · 功能矩阵</span>
+      <h2>一套系统，装下整个校园生活</h2>
+      <p>从交易到社交，从线上到线下，每个模块都为「同校信任」而设计。</p>
+    </div>
+
+    <div class="bento">
+      <!-- 大卡：担保交易 -->
+      <article class="bento-card span-2" data-delay="0">
+        <div class="bento-head">
+          <span class="bento-ico bg-mint">🛡️</span>
+          <div>
+            <h3>担保交易 · 网银级防护</h3>
+            <p>资金平台托管，当面确认后放款，纠纷先行赔付。</p>
+          </div>
+        </div>
+        <div class="escrow">
+          <div class="escrow-step done"><i>1</i><span>买家付款</span></div>
+          <div class="escrow-line"><b style="--p:100%"></b></div>
+          <div class="escrow-step done"><i>2</i><span>平台托管</span></div>
+          <div class="escrow-line"><b class="flow" style="--p:72%"></b></div>
+          <div class="escrow-step active"><i>3</i><span>当面交割</span></div>
+          <div class="escrow-line"><b style="--p:0%"></b></div>
+          <div class="escrow-step"><i>4</i><span>确认放款</span></div>
+        </div>
+      </article>
+
+      <!-- AI 匹配 -->
+      <article class="bento-card" data-delay="80">
+        <div class="bento-head">
+          <span class="bento-ico bg-grape">⚡</span>
+          <div>
+            <h3>AI 搭子匹配</h3>
+            <p>行为画像 × 供需图谱，秒级推荐最合适的搭子。</p>
+          </div>
+        </div>
+        <div class="bars" aria-hidden="true">
+          <i style="--h:62%; --bg:var(--sky)"></i>
+          <i style="--h:84%; --bg:var(--grape)"></i>
+          <i style="--h:48%; --bg:var(--sun)"></i>
+          <i style="--h:92%; --bg:var(--tangerine)"></i>
+          <i style="--h:70%; --bg:var(--mint)"></i>
+        </div>
+      </article>
+
+      <!-- 信用体系 -->
+      <article class="bento-card" data-delay="160">
+        <div class="bento-head">
+          <span class="bento-ico bg-sun">🎖️</span>
+          <div>
+            <h3>校园信用分</h3>
+            <p>实名认证 + 履约记录，信用看得见。</p>
+          </div>
+        </div>
+        <div class="dial" aria-hidden="true">
+          <svg viewBox="0 0 120 70">
+            <path d="M10 65 A50 50 0 0 1 110 65" fill="none" stroke="rgba(28,23,51,.12)" stroke-width="10" stroke-linecap="round"/>
+            <path class="dial-arc" d="M10 65 A50 50 0 0 1 110 65" fill="none" stroke="var(--mint)" stroke-width="10" stroke-linecap="round"/>
+          </svg>
+          <b>756</b>
+          <small>信用极好</small>
+        </div>
+      </article>
+
+      <!-- 拼单引擎 -->
+      <article class="bento-card" data-delay="0">
+        <div class="bento-head">
+          <span class="bento-ico bg-pink">🧩</span>
+          <div>
+            <h3>拼单引擎</h3>
+            <p>5 人成团，满减自动算，差 1 人时全站摇人。</p>
+          </div>
+        </div>
+        <div class="squad" aria-hidden="true">
+          <span class="avatar a1">李</span>
+          <span class="avatar a2">王</span>
+          <span class="avatar a3">赵</span>
+          <span class="avatar a4">陈</span>
+          <span class="avatar ghost">?</span>
+          <em>4/5 已成团</em>
+        </div>
+      </article>
+
+      <!-- 数据看板 -->
+      <article class="bento-card" data-delay="80">
+        <div class="bento-head">
+          <span class="bento-ico bg-sky">📊</span>
+          <div>
+            <h3>运营数据看板</h3>
+            <p>交易热度、品类趋势，一屏掌握校园脉搏。</p>
+          </div>
+        </div>
+        <svg class="spark" viewBox="0 0 200 60" aria-hidden="true">
+          <polyline class="spark-line" points="0,48 25,40 50,44 75,28 100,32 125,18 150,24 175,10 200,14"
+            fill="none" stroke="var(--sky)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle class="spark-dot" cx="200" cy="14" r="4.5" fill="var(--tangerine)" stroke="var(--ink)" stroke-width="2"/>
+        </svg>
+      </article>
+
+      <!-- 大卡：线下门店 -->
+      <article class="bento-card span-2 dark-card" data-delay="160">
+        <div class="bento-head">
+          <span class="bento-ico bg-tangerine">🏪</span>
+          <div>
+            <h3>线下门店 · 信任落地</h3>
+            <p>自提点、快闪摊位、社团合作，把线上信任变成校园里的真实据点。</p>
+          </div>
+        </div>
+        <div class="mini-map" aria-hidden="true">
+          <span class="pin p1" style="--x:18%; --y:30%">📍</span>
+          <span class="pin p2" style="--x:46%; --y:62%">📍</span>
+          <span class="pin p3" style="--x:70%; --y:26%">📍</span>
+          <span class="pin p4" style="--x:84%; --y:58%">📍</span>
+          <span class="map-tag t1" style="--x:18%; --y:14%">一食堂自提点</span>
+          <span class="map-tag t2" style="--x:46%; --y:46%">图书馆快闪</span>
+          <span class="map-tag t3" style="--x:70%; --y:10%">宿舍区代收</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bento { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .bento-card {
+    grid-column: span 1; background: #fff; border: 2.5px solid var(--ink);
+    border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow-hard);
+    display: flex; flex-direction: column; gap: 16px;
+    transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out);
+  }
+  .bento-card:hover { transform: translate(-3px, -4px); box-shadow: var(--shadow-hard-xl); }
+  .bento-card.span-2 { grid-column: span 2; }
+  .bento-head { display: flex; gap: 14px; align-items: flex-start; }
+  .bento-ico {
+    flex: none; width: 48px; height: 48px; border-radius: 14px;
+    display: grid; place-items: center; font-size: 24px;
+    border: 2.5px solid var(--ink); box-shadow: 3px 3px 0 var(--ink);
+  }
+  .bg-mint { background: var(--mint); } .bg-grape { background: var(--grape); }
+  .bg-sun { background: var(--sun); } .bg-pink { background: var(--pink); }
+  .bg-sky { background: var(--sky); } .bg-tangerine { background: var(--tangerine); }
+  .bento-card h3 { font-family: var(--font-zh); font-weight: 400; font-size: 19px; letter-spacing: .5px; }
+  .bento-card p { font-size: 13.5px; color: var(--ink-soft); font-weight: 500; line-height: 1.6; }
+
+  /* 担保交易流程 */
+  .escrow { display: flex; align-items: center; gap: 6px; margin-top: auto; }
+  .escrow-step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: none; }
+  .escrow-step i {
+    width: 34px; height: 34px; border-radius: 50%; font-style: normal;
+    display: grid; place-items: center; font-weight: 900; font-size: 14px;
+    background: #fff; border: 2.5px solid var(--ink); color: var(--ink-soft);
+  }
+  .escrow-step.done i { background: var(--mint); color: var(--ink); }
+  .escrow-step.active i { background: var(--sun); color: var(--ink); animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 50% { transform: scale(1.12); box-shadow: 0 0 0 6px rgba(255,197,61,.35); } }
+  .escrow-step span { font-size: 11.5px; font-weight: 700; white-space: nowrap; }
+  .escrow-line { flex: 1; height: 6px; border-radius: 4px; background: rgba(28,23,51,.1); border: 1.5px solid var(--ink); overflow: hidden; min-width: 18px; }
+  .escrow-line b { display: block; height: 100%; width: var(--p); background: var(--mint); }
+  .escrow-line b.flow { background: linear-gradient(90deg, var(--mint), var(--sun)); animation: flow 2s linear infinite; }
+  @keyframes flow { 50% { opacity: .55; } }
+
+  /* AI 柱状 */
+  .bars { display: flex; align-items: flex-end; gap: 10px; height: 74px; margin-top: auto; padding: 0 4px; }
+  .bars i {
+    flex: 1; height: var(--h); border: 2.5px solid var(--ink); border-radius: 8px 8px 4px 4px;
+    background: var(--bg); transform-origin: bottom; animation: barGrow 2.6s var(--ease-out) infinite alternate;
+  }
+  .bars i:nth-child(2n) { animation-delay: .4s; }
+  .bars i:nth-child(3n) { animation-delay: .8s; }
+  @keyframes barGrow { from { transform: scaleY(.55); } to { transform: scaleY(1); } }
+
+  /* 信用表盘 */
+  .dial { position: relative; margin: auto auto 0; width: 150px; text-align: center; }
+  .dial svg { width: 100%; display: block; }
+  .dial-arc { stroke-dasharray: 157; stroke-dashoffset: 157; animation: dialFill 2.2s var(--ease-out) forwards .3s; }
+  @keyframes dialFill { to { stroke-dashoffset: 23; } }
+  .dial b { position: absolute; left: 0; right: 0; bottom: 16px; font-family: var(--font-latin); font-size: 26px; font-weight: 800; color: var(--ink); }
+  .dial small { position: absolute; left: 0; right: 0; bottom: 0; font-size: 11px; font-weight: 800; color: var(--mint); }
+
+  /* 拼单头像组 */
+  .squad { display: flex; align-items: center; margin-top: auto; padding-left: 10px; }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 50%; margin-left: -10px;
+    display: grid; place-items: center; font-weight: 800; font-size: 14px;
+    border: 2.5px solid var(--ink); color: #fff;
+  }
+  .a1 { background: var(--sky); } .a2 { background: var(--grape); }
+  .a3 { background: var(--tangerine); } .a4 { background: var(--pink); }
+  .avatar.ghost { background: #fff; color: var(--ink-soft); border-style: dashed; animation: ghostBlink 1.8s ease-in-out infinite; }
+  @keyframes ghostBlink { 50% { opacity: .35; } }
+  .squad em { margin-left: 12px; font-size: 12.5px; font-weight: 800; color: var(--tangerine); }
+
+  /* 数据 sparkline */
+  .spark { margin-top: auto; width: 100%; }
+  .spark-line { stroke-dasharray: 320; stroke-dashoffset: 320; animation: draw 2.4s var(--ease-out) forwards .2s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .spark-dot { animation: pulse 1.6s ease-in-out infinite; }
+
+  /* 深色大卡 + 迷你地图 */
+  .dark-card { background: var(--ink); color: var(--cream); }
+  .dark-card p { color: #b9b2d6; }
+  .mini-map {
+    position: relative; height: 120px; margin-top: auto;
+    border: 2.5px solid rgba(255,246,233,.35); border-radius: 16px;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,246,233,.22) 1.2px, transparent 0);
+    background-size: 18px 18px; overflow: hidden;
+  }
+  .pin { position: absolute; left: var(--x); top: var(--y); font-size: 20px; transform: translate(-50%, -100%); animation: pinBob 2.4s ease-in-out infinite; }
+  .p2 { animation-delay: .5s; } .p3 { animation-delay: 1s; } .p4 { animation-delay: 1.5s; }
+  @keyframes pinBob { 50% { transform: translate(-50%, calc(-100% - 7px)); } }
+  .map-tag {
+    position: absolute; left: var(--x); top: var(--y); transform: translateX(-50%);
+    font-size: 10.5px; font-weight: 800; color: var(--ink);
+    background: var(--sun); border: 2px solid var(--ink); border-radius: 999px;
+    padding: 1px 8px; white-space: nowrap;
+  }
+  .t2 { background: var(--mint); } .t3 { background: var(--pink); color: #fff; }
+
+  @media (max-width: 980px) {
+    .bento { grid-template-columns: repeat(2, 1fr); }
+    .bento-card.span-2 { grid-column: span 2; }
+  }
+  @media (max-width: 560px) {
+    .bento { grid-template-columns: 1fr; }
+    .bento-card.span-2 { grid-column: span 1; }
+    .escrow-step span { display: none; }
+  }
+</style>

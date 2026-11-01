@@ -1,0 +1,47 @@
+---
+// 全局氛围 / 全局 UI 层：颗粒噪点、漂浮装饰、滚动进度、回到顶部、Toast
+// 这些元素脱离文档流（fixed 定位），由 Layout 的脚本驱动
+---
+<!-- 颗粒氛围层 -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- 滚动进度条 -->
+<div class="scroll-progress" id="progress"></div>
+
+<!-- 漂浮装饰 -->
+<div class="deco" aria-hidden="true">
+  <span class="blob b-sky"></span>
+  <span class="blob b-sun"></span>
+  <span class="blob b-mint"></span>
+  <span class="blob b-pink"></span>
+  <span class="star s1">✦</span>
+  <span class="star s2">✺</span>
+  <span class="star s3">✶</span>
+</div>
+
+<!-- 回到顶部 -->
+<button aria-label="回到顶部" class="to-top" id="toTop">↑</button>
+
+<!-- 提示 -->
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+
+<style>
+  .to-top {
+    position: fixed; right: 24px; bottom: 24px; width: 50px; height: 50px;
+    border-radius: 50%; border: 2.5px solid var(--ink); background: var(--sun);
+    color: var(--ink); font-size: 22px; font-weight: 800; cursor: pointer;
+    box-shadow: var(--shadow-hard); opacity: 0; transform: translateY(20px);
+    pointer-events: none; transition: opacity .3s, transform .3s; z-index: 60;
+  }
+  .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+  .to-top:hover { transform: translateY(-3px); }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 40px; transform: translate(-50%, 30px);
+    background: var(--ink); color: #fff; padding: 14px 24px; border-radius: 14px;
+    font-size: 14px; font-weight: 700; box-shadow: var(--shadow-hard-lg);
+    border: 2.5px solid var(--ink); opacity: 0; pointer-events: none;
+    transition: opacity .3s, transform .3s; z-index: 80;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+</style>

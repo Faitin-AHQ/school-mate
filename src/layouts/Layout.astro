@@ -1,0 +1,307 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import GlobalUI from '../components/GlobalUI.astro';
+import Cursor from '../components/Cursor.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'School Mate · 校园搭子',
+  description = '大学生轻交易 · 分享平台 —— 用校园社交的信任做底座，叠加轻量交易、二手流转与技能分享。',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/images/logo.png" />
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=ZCOOL+KuaiLe&display=swap"
+      rel="stylesheet"
+    />
+    <!-- 提前标记 JS 支持，避免 .reveal 元素闪烁 -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <Cursor />
+    <Nav />
+    <slot />
+    <Footer />
+    <GlobalUI />
+
+    <script is:inline>
+      const finePointer = window.matchMedia("(pointer:fine)").matches;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // ============ 导航阴影 + 滚动进度 + 视差 ============
+      const nav = document.getElementById("nav");
+      const progress = document.getElementById("progress");
+      const toTop = document.getElementById("toTop");
+      const decoBlobs = [...document.querySelectorAll(".blob, .star")];
+      let ticking = false;
+
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          nav.classList.toggle("scrolled", y > 10);
+          const h = document.documentElement.scrollHeight - window.innerHeight;
+          progress.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
+          toTop.classList.toggle("show", y > 400);
+          // 漂浮装饰滚动视差
+          if (!reduceMotion) {
+            decoBlobs.forEach((el, i) => {
+              const depth = 0.04 + (i % 4) * 0.03;
+              el.style.transform = `translateY(${y * depth}px) rotate(${y * depth * 0.4}deg)`;
+            });
+          }
+          ticking = false;
+        });
+      };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      // ============ 移动端菜单 ============
+      const toggle = document.getElementById("navToggle");
+      const links = document.getElementById("navLinks");
+      toggle.addEventListener("click", () => {
+        const open = links.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", String(open));
+      });
+      links.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => {
+          links.classList.remove("open");
+          toggle.setAttribute("aria-expanded", "false");
+        })
+      );
+
+      // ============ 导航高亮（scrollspy） ============
+      const navAnchors = [...links.querySelectorAll("a")];
+      const sections = navAnchors
+        .map((a) => document.querySelector(a.getAttribute("href")))
+        .filter(Boolean);
+      const spy = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              const id = e.target.id;
+              navAnchors.forEach((a) =>
+                a.classList.toggle("active", a.getAttribute("href") === "#" + id)
+              );
+            }
+          });
+        },
+        { rootMargin: "-45% 0px -50% 0px" }
+      );
+      sections.forEach((s) => spy.observe(s));
+
+      // ============ 进场动画（JS 动态加 class + data-delay 错峰） ============
+      const revealTargets = document.querySelectorAll(
+        ".section-head, .sticker-card, .scene, .tab, .tab-panel, .table-wrap, .faq-item, .marquee, .bento-card, .band-item, .road-item, .voice-card, .cta-card"
+      );
+      revealTargets.forEach((el) => {
+        el.classList.add("reveal");
+        const d = el.dataset.delay;
+        if (d) el.style.setProperty("--d", d + "ms");
+      });
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // ============ 数字滚动 ============
+      const animateCount = (el) => {
+        const target = parseFloat(el.dataset.count);
+        const dur = 1600;
+        const start = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * eased).toLocaleString("zh-CN");
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      const countIO = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              animateCount(e.target);
+              countIO.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+      document.querySelectorAll("[data-count]").forEach((el) => countIO.observe(el));
+
+      // ============ Tab 切换 ============
+      const tabs = [...document.querySelectorAll(".tab")];
+      const panels = [...document.querySelectorAll(".tab-panel")];
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const key = tab.dataset.tab;
+          tabs.forEach((t) => t.classList.toggle("active", t === tab));
+          panels.forEach((p) =>
+            p.classList.toggle("active", p.dataset.panel === key)
+          );
+        });
+      });
+
+      // ============ FAQ 单开 ============
+      const faqs = [...document.querySelectorAll(".faq-item")];
+      faqs.forEach((item) =>
+        item.addEventListener("toggle", () => {
+          if (item.open) faqs.forEach((o) => o !== item && (o.open = false));
+        })
+      );
+
+      // ============ 回到顶部 ============
+      toTop.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      );
+
+      // ============ Toast ============
+      const toast = document.getElementById("toast");
+      let toastTimer;
+      const showToast = (msg) => {
+        toast.textContent = msg;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+      };
+
+      // ============ 内测表单校验 ============
+      const form = document.getElementById("joinForm");
+      const emailInput = document.getElementById("joinEmail");
+      const hint = document.getElementById("formHint");
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      // 仅首页存在表单，404 等页面跳过
+      if (form && emailInput && hint) form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const val = emailInput.value.trim();
+        if (!val) {
+          hint.textContent = "请输入邮箱后再提交～";
+          hint.className = "form-hint err";
+          emailInput.focus();
+          return;
+        }
+        if (!emailRe.test(val)) {
+          hint.textContent = "邮箱格式好像不太对，检查一下？";
+          hint.className = "form-hint err";
+          emailInput.focus();
+          return;
+        }
+        hint.textContent = "✓ 已收到，" + val + " 将在内测时第一时间收到通知";
+        hint.className = "form-hint ok";
+        showToast("申请成功，感谢支持 School Mate！");
+        emailInput.value = "";
+      });
+
+      // ============ Hero 打字机 ============
+      const phrases = [
+        "用校园社交的信任做底座，叠加轻量交易、二手流转与技能分享。",
+        "多端布局，线下赋能——让同校同城的交易更简单、更安心。",
+        "和你的校园搭子，击个掌，把闲置与需求都连接起来。",
+      ];
+      const typedEl = document.getElementById("typed");
+      let pi = 0, ci = 0, deleting = false;
+      const typeLoop = () => {
+        if (!typedEl) return;
+        const full = phrases[pi];
+        typedEl.innerHTML = full.slice(0, ci) + '<span class="caret"></span>';
+        if (!deleting && ci < full.length) {
+          ci++;
+          setTimeout(typeLoop, 45);
+        } else if (!deleting && ci === full.length) {
+          deleting = true;
+          setTimeout(typeLoop, 2200);
+        } else if (deleting && ci > 0) {
+          ci--;
+          setTimeout(typeLoop, 22);
+        } else {
+          deleting = false;
+          pi = (pi + 1) % phrases.length;
+          setTimeout(typeLoop, 400);
+        }
+      };
+      typeLoop();
+
+      // ============ Hero 手机 3D 倾斜 ============
+      const tiltWrap = document.querySelector(".hero-visual");
+      const device = document.getElementById("device");
+      if (tiltWrap && device && finePointer) {
+        tiltWrap.addEventListener("pointermove", (e) => {
+          const r = tiltWrap.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          device.style.setProperty("--ry", (px * 16).toFixed(2) + "deg");
+          device.style.setProperty("--rx", (-py * 16).toFixed(2) + "deg");
+        });
+        tiltWrap.addEventListener("pointerleave", () => {
+          device.style.setProperty("--ry", "0deg");
+          device.style.setProperty("--rx", "0deg");
+        });
+      }
+
+      // ============ 磁吸按钮（data-magnetic） ============
+      if (finePointer && !reduceMotion) {
+        document.querySelectorAll("[data-magnetic]").forEach((el) => {
+          const strength = 18;
+          el.addEventListener("pointermove", (e) => {
+            const r = el.getBoundingClientRect();
+            const dx = e.clientX - (r.left + r.width / 2);
+            const dy = e.clientY - (r.top + r.height / 2);
+            el.style.transform = `translate(${(dx / r.width) * strength}px, ${(dy / r.height) * strength}px)`;
+          });
+          el.addEventListener("pointerleave", () => {
+            el.style.transition = "transform .35s cubic-bezier(.34,1.56,.64,1)";
+            el.style.transform = "";
+            setTimeout(() => (el.style.transition = ""), 350);
+          });
+        });
+      }
+
+      // ============ Hero 漂浮贴纸指针视差 ============
+      const heroVisual = document.querySelector(".hero-visual");
+      const stickers = [...document.querySelectorAll(".float-sticker")];
+      if (heroVisual && stickers.length && finePointer && !reduceMotion) {
+        heroVisual.addEventListener("pointermove", (e) => {
+          const r = heroVisual.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          stickers.forEach((s, i) => {
+            const depth = 14 + i * 8;
+            s.style.translate = `${(-px * depth).toFixed(1)}px ${(-py * depth).toFixed(1)}px`;
+          });
+        });
+        heroVisual.addEventListener("pointerleave", () => {
+          stickers.forEach((s) => (s.style.translate = ""));
+        });
+      }
+    </script>
+  </body>
+</html>

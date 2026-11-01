@@ -1,0 +1,40 @@
+---
+// 常见问题：原生 <details> 手风琴（单开逻辑由 Layout 脚本驱动）
+---
+<section class="section section-cream" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">FAQ · 常见问题</span>
+      <h2>你可能想知道</h2>
+    </div>
+    <div class="faq">
+      <details class="faq-item" open>
+        <summary>School Mate 和闲鱼有什么区别？</summary>
+        <p>闲鱼是全国性平台，同校同城交易少、价格体系不适配学生；School Mate 以「校园搭子」熟人关系做信任底座，叠加轻量交易与线下门店，更懂校园。</p>
+      </details>
+      <details class="faq-item">
+        <summary>交易安全如何保障？</summary>
+        <p>采用校园实名 + 信用体系，并提供网银级担保交易，避免「狐友圈子」式无防护的隐患。</p>
+      </details>
+      <details class="faq-item">
+        <summary>目前支持哪些端？</summary>
+        <p>Web 端、微信小程序端、App 端以及线下门店端，四位一体覆盖全场景。</p>
+      </details>
+      <details class="faq-item">
+        <summary>项目现在处于什么阶段？</summary>
+        <p>目前为辽宁工程技术大学创新创业计划草稿演示阶段，正在孵化，欢迎申请内测。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq { max-width: 780px; margin: 0 auto; display: grid; gap: 14px; }
+  .faq-item { background: #fff; border: 2.5px solid var(--ink); border-radius: 16px; padding: 0 22px; box-shadow: var(--shadow-hard); transition: box-shadow .2s; }
+  .faq-item[open] { box-shadow: var(--shadow-hard-lg); }
+  .faq-item summary { list-style: none; cursor: pointer; padding: 15px 0; font-weight: 800; font-size: 16px; display: flex; justify-content: space-between; align-items: center; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: "+"; font-size: 26px; color: var(--tangerine); font-weight: 800; transition: transform .25s; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p { padding: 0 0 16px; color: var(--ink-soft); font-weight: 500; }
+</style>
